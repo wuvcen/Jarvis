@@ -28,3 +28,15 @@ extension UIImageView {
   }
   
 }
+
+extension String {
+   mutating func toLocalTimeString() {
+    let dateFormatter = NSDateFormatter()
+    dateFormatter.dateFormat = "yyyy-MM-dd'T'HH:mm:ss'Z'"
+    dateFormatter.timeZone = NSTimeZone(abbreviation: "UTC")
+    let date = dateFormatter.dateFromString(self)
+    dateFormatter.dateFormat = "yyyy-MM-dd"
+    dateFormatter.timeZone = NSTimeZone.localTimeZone()
+    self = dateFormatter.stringFromDate(date!)
+  }
+}
