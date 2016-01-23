@@ -36,7 +36,21 @@ class STNetWorkRequestData: NSObject {
   }
   
   func downloadImage(url:String?, completionHandler:(UIImage?, NSError?) -> Void) {
-    
+    let reuqest = STRequest.request(url!)
+    STNetWork.networkTask(reuqest, completionHandler: {(data, response, error) -> Void in
+      if error == nil && data != nil {
+        let image = UIImage(data: data!)
+        dispatch_async(dispatch_get_main_queue(), {
+          completionHandler(image, nil)
+        })
+
+      }
+      else {
+        dispatch_async(dispatch_get_main_queue(), {
+          completionHandler(nil, error)
+        })
+      }
+    })
   }
   
 }

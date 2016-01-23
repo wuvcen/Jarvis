@@ -10,6 +10,10 @@ import UIKit
 import SwiftyJSON
 class STUserViewController: STBasicViewController {
   
+  var currentUser:AnyObject? = nil
+  
+  @IBOutlet weak var avatar: UIImageView!
+  
   override func viewDidLoad() {
     super.viewDidLoad()
     loadUserIfNeeded()
@@ -23,10 +27,10 @@ class STUserViewController: STBasicViewController {
   }
   
   func loadUser() {
-    STNetWorkRequestData(path: "/user").startTask({[weak self] (json, error) -> Void in
-      if error == nil && json != nil {
-        STUserDefaults.setCurrentUser(json)
-        self?.label.text = json?.objectForKey("login") as? String
+    STNetWorkRequestData(path: "/user").startTask({[weak self] (user, error) -> Void in
+      if error == nil && user != nil {
+        self?.currentUser = user
+        self?.avatar.setImageURL(user?.objectForKey("avatar_url") as! String)
       }else if error != nil {
         debugPrint(error?.description)
       }
