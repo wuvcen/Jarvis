@@ -47,4 +47,8 @@ class STUserDefaults: NSObject {
     return nil
   }
   
+  static func setCurrentUser(user:AnyObject?) {
+    setUserDefaultForKey(getAccessToken()!, object: user)
+  }
+  
 }

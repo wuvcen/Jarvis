@@ -27,6 +27,12 @@ class STRequest: NSObject {
     return request
   }
   
+  static func request(imageURL:String) -> NSMutableURLRequest {
+    let request = NSMutableURLRequest(URL: NSURL(string: imageURL)!)
+    request.HTTPMethod = "GET"
+    return request
+  }
+  
   static func buildParams(params:[String : String]?) -> String? {
     if params == nil {
       return nil
@@ -45,5 +51,7 @@ class STNetWork: NSObject {
     let session = NSURLSession.sharedSession()
     let task = session.dataTaskWithRequest(request, completionHandler: completionHandler);
     task.resume()
+    session.finishTasksAndInvalidate()
   }
+  
 }

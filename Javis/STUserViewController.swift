@@ -9,8 +9,6 @@
 import UIKit
 import SwiftyJSON
 class STUserViewController: STBasicViewController {
-
-  @IBOutlet weak var label: UILabel!
   
   override func viewDidLoad() {
     super.viewDidLoad()
@@ -27,7 +25,8 @@ class STUserViewController: STBasicViewController {
   func loadUser() {
     STNetWorkRequestData(path: "/user").startTask({[weak self] (json, error) -> Void in
       if error == nil && json != nil {
-        self?.label.text = json?.objectForKey("login") as? String;
+        STUserDefaults.setCurrentUser(json)
+        self?.label.text = json?.objectForKey("login") as? String
       }else if error != nil {
         debugPrint(error?.description)
       }

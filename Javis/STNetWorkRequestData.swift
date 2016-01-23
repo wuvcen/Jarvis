@@ -35,4 +35,8 @@ class STNetWorkRequestData: NSObject {
     })
   }
   
+  func downloadImage(url:String?, completionHandler:(UIImage?, NSError?) -> Void) {
+    
+  }
+  
 }
