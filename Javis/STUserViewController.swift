@@ -20,6 +20,8 @@ class STUserViewController: STBasicViewController {
   @IBOutlet weak var blog: UILabel!
   @IBOutlet weak var email: UILabel!
   @IBOutlet weak var joinedTime: UILabel!
+  @IBOutlet weak var follower: UILabel!
+  @IBOutlet weak var following: UILabel!
   
   convenience init(user:AnyObject?) {
     self.init(nibName: nil, bundle: nil)
@@ -27,13 +29,22 @@ class STUserViewController: STBasicViewController {
   }
 
   override func viewDidLoad() {
-    
     super.viewDidLoad()
     if self.currentUser == nil {
       loadUserIfNeeded()
     }
+    
     setNavTitle("Profile")
   }
+  
+  func configSubviews() {
+    self.follower.adjustsFontSizeToFitWidth = true
+    self.following.adjustsFontSizeToFitWidth = true
+    
+    self.following.minimumScaleFactor = 0.5
+    self.follower.minimumScaleFactor = 0.5
+  }
+  
   
   func loadUserIfNeeded() {
     if STUserDefaults.doesAccessTokenExsits() {
@@ -67,7 +78,8 @@ class STUserViewController: STBasicViewController {
     var timestring = self.currentUser?.objectForKey("created_at") as! String
     timestring.toLocalTimeString()
     self.joinedTime.text = "joined at \(timestring)"
-    
+    self.follower.text = "\(self.currentUser?.objectForKey("followers") as! Int)"
+    self.following.text = "\(self.currentUser?.objectForKey("following") as! Int)"
   }
   
   override func handleTokenRefreshNotification() {
