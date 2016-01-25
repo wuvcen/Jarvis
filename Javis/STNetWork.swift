@@ -54,4 +54,13 @@ class STNetWork: NSObject {
     session.finishTasksAndInvalidate()
   }
   
+  static func htmlFromURL(url:String, completionHandler:(NSData?) -> Void) {
+    dispatch_async(dispatch_get_global_queue(DISPATCH_QUEUE_PRIORITY_DEFAULT, 0), {
+      let data = NSData(contentsOfURL: NSURL(string: url)!)
+      dispatch_async(dispatch_get_main_queue(), {
+        completionHandler(data)
+      })
+    })
+  }
+  
 }

@@ -42,13 +42,15 @@ class STUserDefaults: NSObject {
   
   static func currentUser() -> AnyObject? {
     if doesAccessTokenExsits() {
-      return UserDefaultForKey(getAccessToken()!)
+      let data =  UserDefaultForKey(getAccessToken()!) as! NSData
+      return NSKeyedUnarchiver.unarchiveObjectWithData(data)
     }
     return nil
   }
   
   static func setCurrentUser(user:AnyObject?) {
-    setUserDefaultForKey(getAccessToken()!, object: user)
+    let data = NSKeyedArchiver.archivedDataWithRootObject(user!)
+    setUserDefaultForKey(getAccessToken()!, object: data)
   }
   
 }

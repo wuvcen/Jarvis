@@ -22,6 +22,7 @@ class STUserViewController: STBasicViewController {
   @IBOutlet weak var joinedTime: UILabel!
   @IBOutlet weak var follower: UILabel!
   @IBOutlet weak var following: UILabel!
+  @IBOutlet weak var contributionView: UIWebView!
   
   convenience init(user:AnyObject?) {
     self.init(nibName: nil, bundle: nil)
@@ -30,8 +31,12 @@ class STUserViewController: STBasicViewController {
 
   override func viewDidLoad() {
     super.viewDidLoad()
+    self.setLeftItems()
     if self.currentUser == nil {
       loadUserIfNeeded()
+    }
+    else {
+      self.updateView()
     }
     
     setNavTitle("Profile")
@@ -55,6 +60,7 @@ class STUserViewController: STBasicViewController {
   func loadUser() {
     STNetWorkRequestData(path: "/user").startTask({[weak self] (user, error) -> Void in
       if error == nil && user != nil {
+        STUserDefaults.setCurrentUser(user)
         self?.currentUser = user
         self?.avatar.setImageURL(user?.objectForKey("avatar_url") as! String)
         self?.avatar.setCornerRadius(4)
@@ -80,12 +86,35 @@ class STUserViewController: STBasicViewController {
     self.joinedTime.text = "joined at \(timestring)"
     self.follower.text = "\(self.currentUser?.objectForKey("followers") as! Int)"
     self.following.text = "\(self.currentUser?.objectForKey("following") as! Int)"
+    STUserSVG.svgString("https://github.com/\(self.userId.text!)", completionHandler: {svg -> Void in
+      if svg != nil {
+        self.contributionView.loadHTMLString(svg!, baseURL: nil)
+        self.contributionView.scrollView.alwaysBounceVertical = false
+      }
+      else {
+        
+      }
+    })
   }
   
   override func handleTokenRefreshNotification() {
     if self.isViewLoaded() {
       loadUser()
     }
+  }
+  
+  func setLeftItems() {
+    let fixedSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
+    fixedSpace.width = 4
+    let notification = UIButton(frame: CGRectMake(0,0,40,40))
+    notification.setImage(UIImage(named: "icon_notification"), forState: UIControlState.Normal)
+    notification.addTarget(self, action: Selector("handleNotification"), forControlEvents: UIControlEvents.TouchUpInside)
+    let item = UIBarButtonItem(customView: notification)
+    self.navigationItem.rightBarButtonItems = [item,fixedSpace]
+  }
+  
+  func handleNotification() {
+    
   }
   
 }

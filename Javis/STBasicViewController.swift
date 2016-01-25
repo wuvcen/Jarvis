@@ -25,6 +25,10 @@ class STBasicViewController: UIViewController {
     addLoginNotificationObserver()
   }
   
+  override func viewDidLoad() {
+     super.viewDidLoad()
+  }
+  
   func addLoginNotificationObserver() {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleTokenRefreshNotification"), name: STNotification.sharedNotification.NOTIFICATION_LOGIN, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleNeedLoginNotification"), name: STNotification.sharedNotification.NOTIFICATION_NEED_LOGIN, object: nil)
@@ -46,6 +50,5 @@ class STBasicViewController: UIViewController {
   func setNavTitle(navTitle:String?) {
     self.navigationItem.title = navTitle
   }
-  
   
 }
