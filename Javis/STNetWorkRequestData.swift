@@ -41,9 +41,9 @@ class STNetWorkRequestData: NSObject {
       if error == nil && data != nil {
         let image = UIImage(data: data!)
         dispatch_async(dispatch_get_main_queue(), {
+          STFileManager.writeToFileWithName(data!, name: url!)
           completionHandler(image, nil)
         })
-
       }
       else {
         dispatch_async(dispatch_get_main_queue(), {

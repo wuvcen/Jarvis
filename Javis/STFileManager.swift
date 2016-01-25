@@ -10,7 +10,7 @@ import UIKit
 
 class STFileManager: NSObject {
   static func documentDirectory() -> String {
-   return NSSearchPathForDirectoriesInDomains(NSSearchPathDirectory.DocumentDirectory, NSSearchPathDomainMask.UserDomainMask, true).first!
+    return NSHomeDirectory().stringByAppendingString("/Documents")
   }
   
   static func STFileManager() -> NSFileManager {
@@ -26,7 +26,7 @@ class STFileManager: NSObject {
   static func doesFileExistsInDocument(imageURL:String) -> Bool {
     //image store in file with name of it's remote url
     let contents = try? STFileManager().contentsOfDirectoryAtPath(imagesDir()) as [String]
-    if contents?.contains("\(imageURL).png") == true {
+    if contents!.contains("\(encodeURL(imageURL)).png") == true {
       return true
     }
     return false
@@ -34,7 +34,7 @@ class STFileManager: NSObject {
   
   static func imageFromDocumentWithURL(imageURL:String) -> UIImage? {
     if doesFileExistsInDocument(imageURL) {
-      let data = NSData(contentsOfFile: "\(imageURL).png")
+      let data = NSData(contentsOfFile: imagesDir().stringByAppendingString("/\(encodeURL(imageURL)).png"))
       let image = UIImage(data: data!)
       return image
     }
@@ -42,14 +42,18 @@ class STFileManager: NSObject {
   }
   
   static func writeToFileWithName(data:NSData, name:String) {
-//    let success = data.writeToFile(, atomically: true)
-    let success = STFileManager().createFileAtPath(imagesDir().stringByAppendingString("/\(name).png"), contents: data, attributes: nil)
+
+    let success = STFileManager().createFileAtPath(imagesDir().stringByAppendingString("/\(encodeURL(name)).png"), contents: data, attributes: nil)
     if success {
-      debugPrint("写入成功")
+      debugPrint("save to local success")
     }
     else {
-      debugPrint("写入失败\(imagesDir())")
+      debugPrint("write failed")
     }
+  }
+  
+  static func encodeURL(url:String) -> String {
+    return url.stringByReplacingOccurrencesOfString("/", withString: "%")
   }
   
 }
