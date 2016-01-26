@@ -21,6 +21,10 @@
 		533905711C5270B80071E97D /* STExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905701C5270B80071E97D /* STExtensions.swift */; };
 		533905771C5275850071E97D /* STImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905761C5275850071E97D /* STImageLoader.swift */; };
 		533905791C5275930071E97D /* STFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905781C5275930071E97D /* STFileManager.swift */; };
+		5339057B1C56338D0071E97D /* STHud.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5339057A1C56338D0071E97D /* STHud.swift */; };
+		5339057D1C5706300071E97D /* Kingfisher.framework in Frameworks */ = {isa = PBXBuildFile; fileRef = 5339057C1C5706300071E97D /* Kingfisher.framework */; };
+		533905811C570ADE0071E97D /* STEventsCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5339057F1C570ADE0071E97D /* STEventsCell.swift */; };
+		533905821C570ADE0071E97D /* STEventsCell.xib in Resources */ = {isa = PBXBuildFile; fileRef = 533905801C570ADE0071E97D /* STEventsCell.xib */; };
 		53B7FE741C4F453200DFEE14 /* STBasicViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7FE731C4F453200DFEE14 /* STBasicViewController.swift */; };
 		53B7FE791C4F506C00DFEE14 /* STMainViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53B7FE771C4F506C00DFEE14 /* STMainViewController.swift */; };
 		53B7FE7A1C4F506C00DFEE14 /* STMainViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 53B7FE781C4F506C00DFEE14 /* STMainViewController.xib */; };
@@ -46,6 +50,10 @@
 		533905701C5270B80071E97D /* STExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STExtensions.swift; sourceTree = "<group>"; };
 		533905761C5275850071E97D /* STImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STImageLoader.swift; sourceTree = "<group>"; };
 		533905781C5275930071E97D /* STFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STFileManager.swift; sourceTree = "<group>"; };
+		5339057A1C56338D0071E97D /* STHud.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STHud.swift; sourceTree = "<group>"; };
+		5339057C1C5706300071E97D /* Kingfisher.framework */ = {isa = PBXFileReference; lastKnownFileType = wrapper.framework; name = Kingfisher.framework; path = Carthage/Build/iOS/Kingfisher.framework; sourceTree = "<group>"; };
+		5339057F1C570ADE0071E97D /* STEventsCell.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STEventsCell.swift; sourceTree = "<group>"; };
+		533905801C570ADE0071E97D /* STEventsCell.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STEventsCell.xib; sourceTree = "<group>"; };
 		53B7FE731C4F453200DFEE14 /* STBasicViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STBasicViewController.swift; sourceTree = "<group>"; };
 		53B7FE771C4F506C00DFEE14 /* STMainViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STMainViewController.swift; sourceTree = "<group>"; };
 		53B7FE781C4F506C00DFEE14 /* STMainViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STMainViewController.xib; sourceTree = "<group>"; };
@@ -59,6 +67,7 @@
 			isa = PBXFrameworksBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				5339057D1C5706300071E97D /* Kingfisher.framework in Frameworks */,
 				B50205E1057AD1D0D1A6F5FC /* Pods.framework in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -69,6 +78,7 @@
 		240BD0BB2B3947659F07F22C /* Frameworks */ = {
 			isa = PBXGroup;
 			children = (
+				5339057C1C5706300071E97D /* Kingfisher.framework */,
 				D03872D1455A107043754DCA /* Pods.framework */,
 			);
 			name = Frameworks;
@@ -146,6 +156,8 @@
 		533905741C5271590071E97D /* views */ = {
 			isa = PBXGroup;
 			children = (
+				5339057F1C570ADE0071E97D /* STEventsCell.swift */,
+				533905801C570ADE0071E97D /* STEventsCell.xib */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -178,6 +190,7 @@
 				533905701C5270B80071E97D /* STExtensions.swift */,
 				533905761C5275850071E97D /* STImageLoader.swift */,
 				533905781C5275930071E97D /* STFileManager.swift */,
+				5339057A1C56338D0071E97D /* STHud.swift */,
 			);
 			name = Utils;
 			sourceTree = "<group>";
@@ -204,6 +217,7 @@
 				530FDA781C48A0D5004011B2 /* Resources */,
 				E92AC83F0A66FC657FE1DF83 /* Copy Pods Resources */,
 				A045583D4841E0055B651AB5 /* Embed Pods Frameworks */,
+				5339057E1C5706370071E97D /* ShellScript */,
 			);
 			buildRules = (
 			);
@@ -227,6 +241,7 @@
 				TargetAttributes = {
 					530FDA791C48A0D5004011B2 = {
 						CreatedOnToolsVersion = 7.2;
+						DevelopmentTeam = 7SVED42PVK;
 					};
 				};
 			};
@@ -254,6 +269,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				530FDA881C48A0D5004011B2 /* LaunchScreen.storyboard in Resources */,
+				533905821C570ADE0071E97D /* STEventsCell.xib in Resources */,
 				53B7FE7A1C4F506C00DFEE14 /* STMainViewController.xib in Resources */,
 				5339056A1C5205410071E97D /* STUserViewController.xib in Resources */,
 				530FDA851C48A0D5004011B2 /* Assets.xcassets in Resources */,
@@ -263,6 +279,20 @@
 /* End PBXResourcesBuildPhase section */
 
 /* Begin PBXShellScriptBuildPhase section */
+		5339057E1C5706370071E97D /* ShellScript */ = {
+			isa = PBXShellScriptBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			inputPaths = (
+				"$(SRCROOT)/Carthage/Build/iOS/Kingfisher.framework",
+			);
+			outputPaths = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+			shellPath = /bin/sh;
+			shellScript = "/usr/local/bin/carthage copy-frameworks";
+		};
 		6539C51E1E1F24F1D3B7702E /* Check Pods Manifest.lock */ = {
 			isa = PBXShellScriptBuildPhase;
 			buildActionMask = 2147483647;
@@ -320,9 +350,11 @@
 				533905791C5275930071E97D /* STFileManager.swift in Sources */,
 				533905771C5275850071E97D /* STImageLoader.swift in Sources */,
 				533905631C5201130071E97D /* STNetWorkRequestData.swift in Sources */,
+				5339057B1C56338D0071E97D /* STHud.swift in Sources */,
 				530FDA7E1C48A0D5004011B2 /* AppDelegate.swift in Sources */,
 				533905711C5270B80071E97D /* STExtensions.swift in Sources */,
 				5339056C1C5222400071E97D /* STColor.swift in Sources */,
+				533905811C570ADE0071E97D /* STEventsCell.swift in Sources */,
 				53B7FE881C4F665700DFEE14 /* STNetWork.swift in Sources */,
 				5339055C1C50BC070071E97D /* STNotification.swift in Sources */,
 				5339055A1C50B8FA0071E97D /* STUserDefaults.swift in Sources */,
@@ -433,15 +465,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Javis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.ele.stephenw.Javis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
 			};
@@ -453,15 +489,19 @@
 			buildSettings = {
 				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
 				CLANG_ENABLE_MODULES = YES;
+				CODE_SIGN_IDENTITY = "iPhone Developer";
+				"CODE_SIGN_IDENTITY[sdk=iphoneos*]" = "iPhone Developer";
 				FRAMEWORK_SEARCH_PATHS = (
 					"$(inherited)",
 					"$(PROJECT_DIR)",
+					"$(PROJECT_DIR)/Carthage/Build/iOS",
 				);
 				INFOPLIST_FILE = Javis/Info.plist;
 				IPHONEOS_DEPLOYMENT_TARGET = 9.0;
 				LD_RUNPATH_SEARCH_PATHS = "$(inherited) @executable_path/Frameworks";
 				PRODUCT_BUNDLE_IDENTIFIER = me.ele.stephenw.Javis;
 				PRODUCT_NAME = "$(TARGET_NAME)";
+				PROVISIONING_PROFILE = "";
 				SWIFT_OBJC_BRIDGING_HEADER = "";
 			};
 			name = Release;

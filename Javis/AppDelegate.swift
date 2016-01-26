@@ -17,7 +17,6 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
   func application(application: UIApplication, didFinishLaunchingWithOptions launchOptions: [NSObject: AnyObject]?) -> Bool {
     self.window = UIWindow(frame: UIScreen.mainScreen().bounds)
     loadTabs()
-    STService.sharedService.loadToken()
     self.window?.makeKeyAndVisible()
     return true
   }
@@ -34,11 +33,13 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let tabController = UITabBarController()
     let mainNav = UINavigationController(rootViewController: STMainViewController(nibName: "STMainViewController", bundle: nil))
     mainNav.tabBarItem.title = "Timeline"
+    mainNav.tabBarItem.image = UIImage(named: "icon_timeline")
     let userNav = UINavigationController(rootViewController: STUserViewController(nibName: "STUserViewController", bundle: nil))
     userNav.tabBarItem.title = "Profile"
+    userNav.tabBarItem.image = UIImage(named: "icon_user")
     tabController.setViewControllers([mainNav, userNav], animated: true)
     
-    tabController.tabBar.tintColor = STColor.strawBerryColor()
+//    tabController.tabBar.tintColor = STColor.strawBerryColor()
     self.window?.rootViewController = tabController
   }
   

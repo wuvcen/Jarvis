@@ -1,0 +1,65 @@
+<?xml version="1.0" encoding="UTF-8" standalone="no"?>
+<document type="com.apple.InterfaceBuilder3.CocoaTouch.XIB" version="3.0" toolsVersion="9531" systemVersion="15C50" targetRuntime="iOS.CocoaTouch" propertyAccessControl="none" useAutolayout="YES" useTraitCollections="YES">
+    <dependencies>
+        <plugIn identifier="com.apple.InterfaceBuilder.IBCocoaTouchPlugin" version="9529"/>
+        <capability name="Constraints to layout margins" minToolsVersion="6.0"/>
+    </dependencies>
+    <objects>
+        <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner"/>
+        <placeholder placeholderIdentifier="IBFirstResponder" id="-2" customClass="UIResponder"/>
+        <tableViewCell contentMode="scaleToFill" selectionStyle="default" indentationWidth="10" reuseIdentifier="event_cell" rowHeight="56" id="KGk-i7-Jjw" customClass="STEventsCell" customModule="Javis" customModuleProvider="target">
+            <rect key="frame" x="0.0" y="0.0" width="449" height="57"/>
+            <autoresizingMask key="autoresizingMask" flexibleMaxX="YES" flexibleMaxY="YES"/>
+            <tableViewCellContentView key="contentView" opaque="NO" clipsSubviews="YES" multipleTouchEnabled="YES" contentMode="center" tableViewCell="KGk-i7-Jjw" id="H2p-sc-9uM">
+                <rect key="frame" x="0.0" y="0.0" width="449" height="57"/>
+                <autoresizingMask key="autoresizingMask"/>
+                <subviews>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" lineBreakMode="wordWrap" numberOfLines="2" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="xo1-5d-uvn">
+                        <rect key="frame" x="56" y="8" width="385" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="17"/>
+                        <color key="textColor" red="0.0" green="0.0" blue="0.0" alpha="1" colorSpace="calibratedRGB"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <label opaque="NO" userInteractionEnabled="NO" contentMode="left" horizontalHuggingPriority="251" verticalHuggingPriority="251" misplaced="YES" text="" textAlignment="natural" lineBreakMode="tailTruncation" baselineAdjustment="alignBaselines" adjustsFontSizeToFit="NO" translatesAutoresizingMaskIntoConstraints="NO" id="YFg-vL-ULs">
+                        <rect key="frame" x="399" y="67" width="42" height="21"/>
+                        <fontDescription key="fontDescription" type="system" pointSize="15"/>
+                        <color key="textColor" white="0.33333333333333331" alpha="1" colorSpace="calibratedWhite"/>
+                        <nil key="highlightedColor"/>
+                    </label>
+                    <view contentMode="scaleToFill" misplaced="YES" translatesAutoresizingMaskIntoConstraints="NO" id="k3A-a5-m5i">
+                        <rect key="frame" x="0.0" y="95" width="449" height="1"/>
+                        <color key="backgroundColor" red="0.90196079019999997" green="0.90196079019999997" blue="0.90196079019999997" alpha="1" colorSpace="calibratedRGB"/>
+                        <constraints>
+                            <constraint firstAttribute="height" constant="1" id="itz-vL-9d5"/>
+                        </constraints>
+                    </view>
+                    <button opaque="NO" contentMode="scaleToFill" contentHorizontalAlignment="center" contentVerticalAlignment="center" lineBreakMode="middleTruncation" translatesAutoresizingMaskIntoConstraints="NO" id="D50-gs-dXo">
+                        <rect key="frame" x="8" y="8" width="40" height="40"/>
+                        <constraints>
+                            <constraint firstAttribute="width" constant="40" id="RMg-oL-RLR"/>
+                            <constraint firstAttribute="height" constant="40" id="RZb-Q1-eEG"/>
+                        </constraints>
+                    </button>
+                </subviews>
+                <constraints>
+                    <constraint firstAttribute="bottom" secondItem="k3A-a5-m5i" secondAttribute="bottom" id="7ic-q1-QM2"/>
+                    <constraint firstItem="D50-gs-dXo" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="K1F-d3-1oz"/>
+                    <constraint firstItem="YFg-vL-ULs" firstAttribute="bottom" secondItem="H2p-sc-9uM" secondAttribute="bottomMargin" id="NWE-Wh-EoB"/>
+                    <constraint firstItem="xo1-5d-uvn" firstAttribute="top" secondItem="H2p-sc-9uM" secondAttribute="topMargin" id="TLD-QA-vSm"/>
+                    <constraint firstItem="k3A-a5-m5i" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leading" id="boF-y7-1aU"/>
+                    <constraint firstItem="YFg-vL-ULs" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="fhZ-NA-lih"/>
+                    <constraint firstAttribute="trailing" secondItem="k3A-a5-m5i" secondAttribute="trailing" id="je5-US-CeB"/>
+                    <constraint firstItem="xo1-5d-uvn" firstAttribute="trailing" secondItem="H2p-sc-9uM" secondAttribute="trailingMargin" id="k4t-No-4hQ"/>
+                    <constraint firstItem="D50-gs-dXo" firstAttribute="leading" secondItem="H2p-sc-9uM" secondAttribute="leadingMargin" id="nhr-kb-3cJ"/>
+                    <constraint firstItem="xo1-5d-uvn" firstAttribute="leading" secondItem="D50-gs-dXo" secondAttribute="trailing" constant="8" id="yD0-rR-SK5"/>
+                </constraints>
+            </tableViewCellContentView>
+            <connections>
+                <outlet property="avatar" destination="D50-gs-dXo" id="8b5-Jb-t8P"/>
+                <outlet property="event" destination="xo1-5d-uvn" id="KE3-dk-KwR"/>
+                <outlet property="time" destination="YFg-vL-ULs" id="Cal-Uc-hEC"/>
+            </connections>
+            <point key="canvasLocation" x="629.5" y="488.5"/>
+        </tableViewCell>
+    </objects>
+</document>

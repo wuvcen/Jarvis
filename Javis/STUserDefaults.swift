@@ -42,8 +42,11 @@ class STUserDefaults: NSObject {
   
   static func currentUser() -> AnyObject? {
     if doesAccessTokenExsits() {
-      let data =  UserDefaultForKey(getAccessToken()!) as! NSData
-      return NSKeyedUnarchiver.unarchiveObjectWithData(data)
+      let data =  UserDefaultForKey(getAccessToken()!) as? NSData
+      if data == nil {
+        return nil
+      }
+      return NSKeyedUnarchiver.unarchiveObjectWithData(data!)
     }
     return nil
   }
@@ -51,6 +54,17 @@ class STUserDefaults: NSObject {
   static func setCurrentUser(user:AnyObject?) {
     let data = NSKeyedArchiver.archivedDataWithRootObject(user!)
     setUserDefaultForKey(getAccessToken()!, object: data)
+  }
+  
+  static func validateUser(user:AnyObject) -> Bool{
+    let login = user.objectForKey("login") as? String
+    if login != nil {
+      return true
+    }
+    NSUserDefaults.standardUserDefaults().removeObjectForKey(getAccessToken()!)
+    NSUserDefaults.standardUserDefaults().removeObjectForKey("access_token")
+    STNotification.postNotification(STNotification.sharedNotification.NOTIFICATION_NEED_LOGIN)
+    return false
   }
   
 }

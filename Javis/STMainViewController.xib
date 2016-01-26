@@ -6,6 +6,7 @@
     <objects>
         <placeholder placeholderIdentifier="IBFilesOwner" id="-1" userLabel="File's Owner" customClass="STMainViewController" customModule="Javis" customModuleProvider="target">
             <connections>
+                <outlet property="tableView" destination="F64-9y-ngl" id="E0g-W7-NJB"/>
                 <outlet property="view" destination="i5M-Pr-FkT" id="sfx-zR-JGt"/>
             </connections>
         </placeholder>
@@ -13,8 +14,20 @@
         <view clearsContextBeforeDrawing="NO" contentMode="scaleToFill" id="i5M-Pr-FkT">
             <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
             <autoresizingMask key="autoresizingMask" widthSizable="YES" heightSizable="YES"/>
+            <subviews>
+                <tableView clipsSubviews="YES" contentMode="scaleToFill" alwaysBounceVertical="YES" style="plain" separatorStyle="none" rowHeight="44" sectionHeaderHeight="28" sectionFooterHeight="28" translatesAutoresizingMaskIntoConstraints="NO" id="F64-9y-ngl">
+                    <rect key="frame" x="0.0" y="0.0" width="600" height="600"/>
+                    <color key="backgroundColor" white="1" alpha="1" colorSpace="calibratedWhite"/>
+                </tableView>
+            </subviews>
             <color key="backgroundColor" white="1" alpha="1" colorSpace="custom" customColorSpace="calibratedWhite"/>
-            <point key="canvasLocation" x="421" y="325"/>
+            <constraints>
+                <constraint firstAttribute="bottom" secondItem="F64-9y-ngl" secondAttribute="bottom" id="6oX-Jq-xou"/>
+                <constraint firstItem="F64-9y-ngl" firstAttribute="top" secondItem="i5M-Pr-FkT" secondAttribute="top" id="Uve-wc-bWF"/>
+                <constraint firstItem="F64-9y-ngl" firstAttribute="leading" secondItem="i5M-Pr-FkT" secondAttribute="leading" id="gwQ-xJ-Scz"/>
+                <constraint firstAttribute="trailing" secondItem="F64-9y-ngl" secondAttribute="trailing" id="mQm-mE-EA4"/>
+            </constraints>
+            <point key="canvasLocation" x="176" y="317"/>
         </view>
     </objects>
 </document>

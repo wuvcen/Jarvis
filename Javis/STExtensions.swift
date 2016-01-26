@@ -9,10 +9,6 @@
 import UIKit
 
 extension UIImageView {
-  func setCornerRadius(radius:CGFloat) {
-    self.layer.cornerRadius = radius
-    self.clipsToBounds = true
-  }
   
   func setImageURL(url:String) {
     STImageLoader.loadImage(url, completionHanlder: {(image, error) -> Void in
@@ -27,6 +23,7 @@ extension UIImageView {
   
 }
 
+
 extension String {
    mutating func toLocalTimeString() {
     let dateFormatter = NSDateFormatter()
@@ -36,5 +33,19 @@ extension String {
     dateFormatter.dateFormat = "yyyy-MM-dd"
     dateFormatter.timeZone = NSTimeZone.localTimeZone()
     self = dateFormatter.stringFromDate(date!)
+  }
+}
+
+extension UIView {
+  //waste to much memory
+  func ovalCover(sideWidth:CGFloat) {
+    let path = UIBezierPath(ovalInRect: CGRectMake(0, 0, sideWidth, sideWidth))
+    let mask = CAShapeLayer()
+    mask.path = path.CGPath
+    self.layer.mask = mask
+  }
+  func setCornerRadius(radius:CGFloat) {
+    self.layer.cornerRadius = radius
+    self.clipsToBounds = true
   }
 }

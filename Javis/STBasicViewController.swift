@@ -25,13 +25,19 @@ class STBasicViewController: UIViewController {
     addLoginNotificationObserver()
   }
   
+  
   override func viewDidLoad() {
      super.viewDidLoad()
+  }
+  
+  deinit {
+    NSNotificationCenter.defaultCenter().removeObserver(self)
   }
   
   func addLoginNotificationObserver() {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleTokenRefreshNotification"), name: STNotification.sharedNotification.NOTIFICATION_LOGIN, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleNeedLoginNotification"), name: STNotification.sharedNotification.NOTIFICATION_NEED_LOGIN, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleNeedWaitNotificaiton"), name: STNotification.sharedNotification.NOTIFICATION_WAIT, object: nil)
   }
   
   func handleTokenRefreshNotification() {
@@ -44,6 +50,10 @@ class STBasicViewController: UIViewController {
   
   func handleNeedLoginNotification() {
     debugPrint("\(self) have receieved need login notification")
+  }
+  
+  func handleNeedWaitNotificaiton() {
+    debugPrint("\(self) have receieved need wait notification")
   }
   
   //config navgationcontroller

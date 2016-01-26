@@ -11,6 +11,8 @@ import UIKit
 class STNotification: NSObject {
   let NOTIFICATION_LOGIN = "notification_login"
   let NOTIFICATION_NEED_LOGIN = "notification_need_login"
+  let NOTIFICATION_WAIT = "notification_wait"
+  let NOTIFICATION_USER_REFRESHED = "notification_user_refreshed"
   
   class var sharedNotification : STNotification {
     struct Static {

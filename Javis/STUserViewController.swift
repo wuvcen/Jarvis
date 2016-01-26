@@ -7,10 +7,14 @@
 //
 
 import UIKit
+import SafariServices
 import SwiftyJSON
+
+
 class STUserViewController: STBasicViewController {
   
   var currentUser:AnyObject? = nil
+//  var 
   
   @IBOutlet weak var avatar: UIImageView!
   @IBOutlet weak var userId: UILabel!
@@ -23,6 +27,7 @@ class STUserViewController: STBasicViewController {
   @IBOutlet weak var follower: UILabel!
   @IBOutlet weak var following: UILabel!
   @IBOutlet weak var contributionView: UIWebView!
+  @IBOutlet weak var errorView: UIView!
   
   convenience init(user:AnyObject?) {
     self.init(nibName: nil, bundle: nil)
@@ -32,6 +37,7 @@ class STUserViewController: STBasicViewController {
   override func viewDidLoad() {
     super.viewDidLoad()
     self.setLeftItems()
+    self.configSubviews()
     if self.currentUser == nil {
       loadUserIfNeeded()
     }
@@ -48,6 +54,9 @@ class STUserViewController: STBasicViewController {
     
     self.following.minimumScaleFactor = 0.5
     self.follower.minimumScaleFactor = 0.5
+    
+    self.contributionView.scrollView.alwaysBounceVertical = false
+    self.contributionView.scrollView.alwaysBounceHorizontal = false
   }
   
   
@@ -58,13 +67,19 @@ class STUserViewController: STBasicViewController {
   }
   
   func loadUser() {
+    self.pleaseWait()
     STNetWorkRequestData(path: "/user").startTask({[weak self] (user, error) -> Void in
       if error == nil && user != nil {
+        if !STUserDefaults.validateUser(user!) {
+          return
+        }
         STUserDefaults.setCurrentUser(user)
+        self?.clearAllNotice()
         self?.currentUser = user
         self?.avatar.setImageURL(user?.objectForKey("avatar_url") as! String)
         self?.avatar.setCornerRadius(4)
         self!.updateView()
+        STNotification.postNotification(STNotification.sharedNotification.NOTIFICATION_USER_REFRESHED)
       }else if error != nil {
         debugPrint(error?.description)
       }
@@ -79,7 +94,11 @@ class STUserViewController: STBasicViewController {
     self.userId.text = self.currentUser?.objectForKey("login") as? String
     self.location.text = self.currentUser?.objectForKey("location") as? String
     self.group.text = self.currentUser?.objectForKey("company") as? String
+    
     self.blog.text = self.currentUser?.objectForKey("blog") as? String
+    self.blog.userInteractionEnabled = true
+    self.blog.addGestureRecognizer(UITapGestureRecognizer(target: self, action: Selector("handleTapLink")))
+    
     self.email.text = self.currentUser?.objectForKey("email") as? String
     var timestring = self.currentUser?.objectForKey("created_at") as! String
     timestring.toLocalTimeString()
@@ -89,10 +108,10 @@ class STUserViewController: STBasicViewController {
     STUserSVG.svgString("https://github.com/\(self.userId.text!)", completionHandler: {svg -> Void in
       if svg != nil {
         self.contributionView.loadHTMLString(svg!, baseURL: nil)
-        self.contributionView.scrollView.alwaysBounceVertical = false
+        self.errorView.hidden = true
       }
       else {
-        
+        self.errorView.hidden = false
       }
     })
   }
@@ -101,6 +120,10 @@ class STUserViewController: STBasicViewController {
     if self.isViewLoaded() {
       loadUser()
     }
+  }
+  
+  override func handleNeedLoginNotification() {
+    
   }
   
   func setLeftItems() {
@@ -115,6 +138,11 @@ class STUserViewController: STBasicViewController {
   
   func handleNotification() {
     
+  }
+  
+  func handleTapLink() {
+    let svc = SFSafariViewController(URL: NSURL(string: (self.blog.attributedText?.string)!)!)
+    self.presentViewController(svc, animated: true, completion: nil)
   }
   
 }

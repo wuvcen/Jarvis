@@ -36,6 +36,7 @@ class STService: NSObject {
     let code = url.query
     let array = code?.componentsSeparatedByString("=")
     self.ACCESS_CODE = array![1]
+    STNotification.postNotification(STNotification.sharedNotification.NOTIFICATION_WAIT)
     refreshToken()
   }
   
