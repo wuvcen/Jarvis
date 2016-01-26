@@ -28,6 +28,8 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
     self.tableView.registerNib(UINib(nibName: "STEventsCell", bundle: nil), forCellReuseIdentifier: reuseIdentifier)
     self.tableView.dataSource = self
     self.tableView.delegate = self
+    self.tableView.estimatedRowHeight = 100
+    self.tableView.rowHeight = UITableViewAutomaticDimension
   }
   
   func loadData() {
@@ -92,11 +94,6 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
     }
     let events = self.eventsData!
     return events.count
-  }
-  
-  func tableView(tableView: UITableView, heightForRowAtIndexPath indexPath: NSIndexPath) -> CGFloat {
-    let cell = tableView.dequeueReusableCellWithIdentifier(reuseIdentifier) as? STEventsCell
-    return (cell?.cellHeight())!
   }
   
 }

@@ -27,8 +27,11 @@ class STEventsCell: UITableViewCell {
       return
     }
     let actor = model?.objectForKey("actor")
+    var time = model?.objectForKey("created_at") as? String
+    time?.toLocalTimeString()
     self.avatar.kf_setImageWithURL(NSURL(string: (actor?.objectForKey("avatar_url"))! as! String)!, forState: UIControlState.Normal)
     self.event.text = buildActionString(model)
+    self.time.text = time
   }
   
   func buildActionString(model:AnyObject?) ->String {
@@ -82,10 +85,6 @@ class STEventsCell: UITableViewCell {
       default: break
     }
     return "\(actor) \(action == nil ? "" : action!) \(repo)"
-  }
-  
-  func cellHeight() -> CGFloat {
-    return 56
   }
     
 }
