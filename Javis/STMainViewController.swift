@@ -14,6 +14,7 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
   var currentPage = 1
   var eventsData:[AnyObject]? = nil
   var svc:SFSafariViewController?
+  var loginButton:UIButton?
   
   @IBOutlet weak var tableView: UITableView!
   
@@ -34,7 +35,6 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
       self?.currentPage = 1
       self?.loadData((self?.currentPage)!)
     })
-    
     self.tableView.addLoadMore({ [weak self]() -> Void in
       self?.loadMore({() -> Void in
         self?.tableView.makeLoadMoreNormal()
@@ -48,6 +48,9 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
   }
   
   func loadData(page:Int, completion:actionBlock?) {
+    if page == 1 {
+      self.tableView.tableFooterView?.hidden = true
+    }
     let user = STUserDefaults.currentUser() as? [String : AnyObject]
     if user == nil || STUserDefaults.getAccessToken() == nil {
       return
@@ -56,6 +59,9 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
     data.startTask({(object, error) -> Void in
       if completion != nil {
         completion!()
+      }
+      if self.tableView.tableFooterView?.hidden == true {
+        self.tableView.tableFooterView?.hidden = false
       }
       if error == nil {
         if self.eventsData == nil {
@@ -85,11 +91,29 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
   
   override func handleNeedLoginNotification() {
     super.handleNeedLoginNotification()
-    self.clearAllNotice()
-    if self.svc == nil {
-      self.svc = SFSafariViewController(URL: NSURL(string: STService.sharedService.AUTHORIZE_URL)!)
-      self.presentViewController(svc!, animated: true, completion: nil)
+    if self.isViewLoaded() {
+      self.eventsData = nil
+      self.tableView.reloadData()
     }
+    if self.loginButton != nil {
+      if self.loginButton?.superview != nil {
+        self.loginButton?.removeFromSuperview()
+      }
+    }
+    if self.loginButton == nil {
+      self.loginButton = UIButton(type: UIButtonType.System)
+      self.loginButton?.setTitle("login", forState: UIControlState.Normal)
+      self.loginButton?.addTarget(self, action: Selector("handleSFAction"), forControlEvents: UIControlEvents.TouchUpInside)
+    }
+    self.view.addSubview(self.loginButton!)
+    self.loginButton?.autoCenterInSuperview()
+    self.tableView.tableFooterView?.hidden = true
+  }
+  
+  func handleSFAction() {
+    self.svc = nil
+    self.svc = SFSafariViewController(URL: NSURL(string: STService.sharedService.AUTHORIZE_URL)!)
+    self.presentViewController(svc!, animated: true, completion: nil)
   }
   
   override func handleTokenRefreshNotification() {
@@ -107,6 +131,7 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
   override func handleUserRefreshedNotification() {
     if self.view.window != nil {
       super.handleUserRefreshedNotification()
+      self.loginButton?.removeFromSuperview()
       self.clearAllNotice()
       self.loadData(self.currentPage)
     }

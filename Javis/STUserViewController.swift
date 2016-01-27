@@ -112,6 +112,20 @@ class STUserViewController: STBasicViewController {
     })
   }
   
+  func clearView() {
+    self.avatar.image = nil
+    self.userName.text = nil
+    self.userId.text = nil
+    self.location.text = nil
+    self.group.text = nil
+    self.blog.text = nil
+    self.email.text = nil
+    self.joinedTime.text = nil
+    self.follower.text = nil
+    self.following.text = nil
+    self.contributionView.loadHTMLString("", baseURL: nil)
+  }
+  
   override func handleTokenRefreshNotification() {
     if self.isViewLoaded() {
       loadUser()
@@ -127,18 +141,38 @@ class STUserViewController: STBasicViewController {
   
   
   func setLeftItems() {
-    let fixedSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)
-    fixedSpace.width = 4
     let notification = UIButton(frame: CGRectMake(0,0,40,40))
     notification.setImage(UIImage(named: "icon_notification"), forState: UIControlState.Normal)
     notification.addTarget(self, action: Selector("handleNotification"), forControlEvents: UIControlEvents.TouchUpInside)
+    notification.hidden = true
     let item = UIBarButtonItem(customView: notification)
-    self.navigationItem.rightBarButtonItems = [item,fixedSpace]
+    
+    let exit = UIButton(frame: CGRectMake(0,0,40,40))
+    exit.setImage(UIImage(named: "icon_exit"), forState: UIControlState.Normal)
+    exit.addTarget(self, action: Selector("handleLogout"), forControlEvents: UIControlEvents.TouchUpInside)
+    let exitItem = UIBarButtonItem(customView: exit)
+    self.navigationItem.rightBarButtonItems = [exitItem,item]
   }
   
   func handleNotification() {
     
   }
+  
+  func handleLogout() {
+    let alertController = UIAlertController(title: "confirm logout", message: nil, preferredStyle: UIAlertControllerStyle.ActionSheet)
+    let confirmAction = UIAlertAction(title: "true", style: UIAlertActionStyle.Destructive, handler: {[weak self](action) -> Void in
+      alertController.dismissViewControllerAnimated(true, completion: nil)
+        STUserDefaults.removeCurrentUser()
+        self?.clearView()
+    })
+    let cancelAction = UIAlertAction(title: "false", style: UIAlertActionStyle.Cancel, handler: {(action) -> Void in
+      alertController.dismissViewControllerAnimated(true, completion: nil)
+    })
+    alertController.addAction(confirmAction)
+    alertController.addAction(cancelAction)
+    self.presentViewController(alertController, animated: true, completion: nil)
+  }
+  
   
   func handleTapLink() {
     let svc = SFSafariViewController(URL: NSURL(string: (self.blog.attributedText?.string)!)!)

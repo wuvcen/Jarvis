@@ -18,6 +18,10 @@ class STUserDefaults: NSObject {
     NSUserDefaults.standardUserDefaults().setObject(object, forKey: key)
   }
   
+  static func removeDefaultForKey(key:String) {
+    NSUserDefaults.standardUserDefaults().removeObjectForKey(key)
+  }
+  
   static func doesStringExsits(key:String) -> Bool {
     if UserDefaultForKey(key) != nil && UserDefaultForKey(key) as! String != "" {
       return true
@@ -54,6 +58,14 @@ class STUserDefaults: NSObject {
   static func setCurrentUser(user:AnyObject?) {
     let data = NSKeyedArchiver.archivedDataWithRootObject(user!)
     setUserDefaultForKey(getAccessToken()!, object: data)
+  }
+  
+  static func removeCurrentUser() {
+    if getAccessToken() == nil {
+      return
+    }
+    removeDefaultForKey(getAccessToken()!)
+    removeDefaultForKey("access_token")
   }
   
   static func validateUser(user:AnyObject) -> Bool{

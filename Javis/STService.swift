@@ -12,7 +12,7 @@ import SwiftyJSON
 class STService: NSObject {
   let CLIENT_ID = "90c717280c265c4b5cc6"
   let CLIENT_SECRET = "85fe699610969206b82cb8d295ecf9aaed145c5f"
-  let AUTHORIZE_URL = "https://github.com/login/oauth/authorize?client_id=90c717280c265c4b5cc6&scope=user,repo,notifications,gist"
+  let AUTHORIZE_URL = "https://github.com/login/oauth/authorize?client_id=90c717280c265c4b5cc6&scope=user,repo,notifications,gist,admin:org"
   let REFRESH_TOKEN_URL = "https://github.com/login/oauth/access_token"
   let ACCESS_TOKEN_KEY = "access_token"
   

@@ -59,14 +59,19 @@ class STNetWorkRequestData: NSObject {
 class STUserSVG: NSObject {
   static func svgString(url:String, completionHandler:(String?) -> Void) {
     STNetWork.htmlFromURL(url, completionHandler: {data -> Void in
-      let html = String(data: data!, encoding: NSUTF8StringEncoding)
-      do {
-        let doc = try HTMLDocument(string: html!, encoding: NSUTF8StringEncoding)
-        let svg = doc.xpath("//*[@id='contributions-calendar']/div[1]/svg")
-        completionHandler(svg.first?.rawXML)
-      } catch let error {
+      if data != nil {
+        let html = String(data: data!, encoding: NSUTF8StringEncoding)
+        do {
+          let doc = try HTMLDocument(string: html!, encoding: NSUTF8StringEncoding)
+          let svg = doc.xpath("//*[@id='contributions-calendar']/div[1]/svg")
+          completionHandler(svg.first?.rawXML)
+        } catch let error {
+          completionHandler(nil)
+          debugPrint(error)
+        }
+      }
+      else {
         completionHandler(nil)
-        debugPrint(error)
       }
       
     })
