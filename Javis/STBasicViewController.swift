@@ -38,6 +38,7 @@ class STBasicViewController: UIViewController {
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleTokenRefreshNotification"), name: STNotification.sharedNotification.NOTIFICATION_LOGIN, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleNeedLoginNotification"), name: STNotification.sharedNotification.NOTIFICATION_NEED_LOGIN, object: nil)
     NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleNeedWaitNotificaiton"), name: STNotification.sharedNotification.NOTIFICATION_WAIT, object: nil)
+    NSNotificationCenter.defaultCenter().addObserver(self, selector: Selector("handleUserRefreshedNotification"), name: STNotification.sharedNotification.NOTIFICATION_USER_REFRESHED, object: nil)
   }
   
   func handleTokenRefreshNotification() {
@@ -54,6 +55,10 @@ class STBasicViewController: UIViewController {
   
   func handleNeedWaitNotificaiton() {
     debugPrint("\(self) have receieved need wait notification")
+  }
+  
+  func handleUserRefreshedNotification() {
+    debugPrint("\(self) have receieved user refrehed notification")
   }
   
   //config navgationcontroller

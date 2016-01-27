@@ -14,7 +14,6 @@ import SwiftyJSON
 class STUserViewController: STBasicViewController {
   
   var currentUser:AnyObject? = nil
-//  var 
   
   @IBOutlet weak var avatar: UIImageView!
   @IBOutlet weak var userId: UILabel!
@@ -68,28 +67,22 @@ class STUserViewController: STBasicViewController {
   
   func loadUser() {
     self.pleaseWait()
-    STNetWorkRequestData(path: "/user").startTask({[weak self] (user, error) -> Void in
-      if error == nil && user != nil {
-        if !STUserDefaults.validateUser(user!) {
-          return
-        }
-        STUserDefaults.setCurrentUser(user)
-        self?.clearAllNotice()
-        self?.currentUser = user
-        self?.avatar.setImageURL(user?.objectForKey("avatar_url") as! String)
-        self?.avatar.setCornerRadius(4)
-        self!.updateView()
-        STNotification.postNotification(STNotification.sharedNotification.NOTIFICATION_USER_REFRESHED)
-      }else if error != nil {
-        debugPrint(error?.description)
-      }
-    })
+    if STUserDefaults.currentUser() != nil {
+      self.clearAllNotice()
+      self.currentUser = STUserDefaults.currentUser()
+      self.updateView()
+    }
+    else {
+      STCurrentUser.singleTon.requestUser()
+    }
   }
   
   func updateView() {
     if self.currentUser == nil {
       return
     }
+    self.avatar.setImageURL(self.currentUser?.objectForKey("avatar_url") as! String)
+    self.avatar.setCornerRadius(4)
     self.userName.text = self.currentUser?.objectForKey("name") as? String
     self.userId.text = self.currentUser?.objectForKey("login") as? String
     self.location.text = self.currentUser?.objectForKey("location") as? String
@@ -105,7 +98,10 @@ class STUserViewController: STBasicViewController {
     self.joinedTime.text = "joined at \(timestring)"
     self.follower.text = "\(self.currentUser?.objectForKey("followers") as! Int)"
     self.following.text = "\(self.currentUser?.objectForKey("following") as! Int)"
+    
+    self.contributionView.showLoading()
     STUserSVG.svgString("https://github.com/\(self.userId.text!)", completionHandler: {svg -> Void in
+      self.contributionView.dismissLoading()
       if svg != nil {
         self.contributionView.loadHTMLString(svg!, baseURL: nil)
         self.errorView.hidden = true
@@ -122,9 +118,13 @@ class STUserViewController: STBasicViewController {
     }
   }
   
-  override func handleNeedLoginNotification() {
-    
+  override func handleUserRefreshedNotification() {
+    self.clearAllNotice()
+    if self.isViewLoaded() {
+      self.loadUser()
+    }
   }
+  
   
   func setLeftItems() {
     let fixedSpace = UIBarButtonItem(barButtonSystemItem: UIBarButtonSystemItem.FixedSpace, target: nil, action: nil)

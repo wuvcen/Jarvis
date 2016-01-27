@@ -12,8 +12,9 @@ class STRequest: NSObject {
   static func request(url:String, params:[String : String]?, method:String) -> NSMutableURLRequest {
     let request = NSMutableURLRequest(URL: NSURL(string: url)!)
     request.HTTPMethod = method
-    if method == "GET" {
+    if method == "GET" && params != nil {
       request.URL = NSURL(string: "\(url)?\(buildParams(params))")
+      debugPrint(request.URL)
     } else {
       let body = buildParams(params)
       if body != nil {
@@ -51,7 +52,6 @@ class STNetWork: NSObject {
     let session = NSURLSession.sharedSession()
     let task = session.dataTaskWithRequest(request, completionHandler: completionHandler);
     task.resume()
-    session.finishTasksAndInvalidate()
   }
   
   static func htmlFromURL(url:String, completionHandler:(NSData?) -> Void) {

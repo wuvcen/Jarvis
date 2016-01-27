@@ -13,13 +13,12 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
   let reuseIdentifier = "event_cell"
   var currentPage = 1
   var eventsData:[AnyObject]? = nil
-  var svc:SFSafariViewController? = nil
+  var svc:SFSafariViewController?
   
   @IBOutlet weak var tableView: UITableView!
   
   override func viewDidLoad() {
     super.viewDidLoad()
-    STService.sharedService.loadToken()
     setNavTitle("Timeline")
     configSubviews()
   }
@@ -30,35 +29,64 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
     self.tableView.delegate = self
     self.tableView.estimatedRowHeight = 100
     self.tableView.rowHeight = UITableViewAutomaticDimension
+    self.tableView.addRefresh({ [weak self]() -> Void in
+      self?.eventsData?.removeAll()
+      self?.currentPage = 1
+      self?.loadData((self?.currentPage)!)
+    })
+    
+    self.tableView.addLoadMore({ [weak self]() -> Void in
+      self?.loadMore({() -> Void in
+        self?.tableView.makeLoadMoreNormal()
+      })
+    })
+    
   }
   
-  func loadData() {
+  func loadData(page:Int) {
+    self.loadData(page, completion: nil)
+  }
+  
+  func loadData(page:Int, completion:actionBlock?) {
     let user = STUserDefaults.currentUser() as? [String : AnyObject]
-    if user == nil {
+    if user == nil || STUserDefaults.getAccessToken() == nil {
       return
     }
-    let data = STNetWorkRequestData(path: "/users/\(user!["login"] as! String)/received_events?page=\(self.currentPage)")
+    let data = STNetWorkRequestData(path: "/users/\(user!["login"] as! String)/received_events?page=\(page)")
     data.startTask({(object, error) -> Void in
+      if completion != nil {
+        completion!()
+      }
       if error == nil {
-        self.currentPage++
         if self.eventsData == nil {
           self.eventsData = object as? [AnyObject]
         }
+        else {
+          self.eventsData?.appendContentsOf(object as! [AnyObject])
+        }
         self.tableView.reloadData()
+        self.tableView.endRefresh()
       }
     })
   }
   
-  override func viewWillAppear(animated: Bool) {
-    super.viewWillAppear(animated)
+  func loadMore(completion:actionBlock?) {
+    self.currentPage += 1
+    self.loadData(self.currentPage, completion: completion)
+  }
+  
+  override func viewDidAppear(animated: Bool) {
+    super.viewDidAppear(animated)
+    STCurrentUser.singleTon.requestUser()
     if self.eventsData == nil {
-      loadData()
+      loadData(self.currentPage)
     }
   }
   
   override func handleNeedLoginNotification() {
     super.handleNeedLoginNotification()
-    if self.view.window != nil {
+    self.clearAllNotice()
+    if self.svc == nil {
       self.svc = SFSafariViewController(URL: NSURL(string: STService.sharedService.AUTHORIZE_URL)!)
       self.presentViewController(svc!, animated: true, completion: nil)
     }
@@ -66,19 +94,29 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
   
   override func handleTokenRefreshNotification() {
     super.handleTokenRefreshNotification()
-    self.svc?.dismissViewControllerAnimated(true, completion: nil)
+    self.svc!.dismissViewControllerAnimated(true, completion: nil)
     self.svc?.clearAllNotice()
+    STCurrentUser.singleTon.requestUser()
   }
   
   override func handleNeedWaitNotificaiton() {
     super.handleNeedWaitNotificaiton()
-    self.svc?.view.userInteractionEnabled = false
     self.svc?.pleaseWait()
   }
   
+  override func handleUserRefreshedNotification() {
+    if self.view.window != nil {
+      super.handleUserRefreshedNotification()
+      self.clearAllNotice()
+      self.loadData(self.currentPage)
+    }
+  }
+  
+  
+  
   func handleUserRefreshed() {
     self.currentPage = 1
-    self.loadData()
+    self.loadData(self.currentPage)
   }
   
   //tableview data source
@@ -95,5 +133,6 @@ class STMainViewController: STBasicViewController, UITableViewDataSource, UITabl
     let events = self.eventsData!
     return events.count
   }
+  
   
 }

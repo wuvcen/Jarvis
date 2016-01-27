@@ -20,7 +20,7 @@ class STEventsCell: UITableViewCell {
   }
 
   override func setSelected(selected: Bool, animated: Bool) {
-    super.setSelected(selected, animated: animated)
+    super.setSelected(false, animated: animated)
   }
   func setModel(model:AnyObject?) {
     if model == nil {

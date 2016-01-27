@@ -14,6 +14,11 @@
 			<key>isShown</key>
 			<false/>
 		</dict>
+		<key>PureLayout.xcscheme</key>
+		<dict>
+			<key>isShown</key>
+			<false/>
+		</dict>
 		<key>SwiftyJSON.xcscheme</key>
 		<dict>
 			<key>isShown</key>
@@ -27,12 +32,17 @@
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>42192DABB51E4AB114E93A14975A1B86</key>
+		<key>965F8926F6C1B4E0B68D6BF9C6AB2606</key>
 		<dict>
 			<key>primary</key>
 			<true/>
 		</dict>
-		<key>995F5E8C2CE6C78485556E7F54DD3525</key>
+		<key>DEC93AD761F86C3C08FBE45120447C7C</key>
+		<dict>
+			<key>primary</key>
+			<true/>
+		</dict>
+		<key>EAD17C84C7D1ADC9BF805D93135AF7BB</key>
 		<dict>
 			<key>primary</key>
 			<true/>

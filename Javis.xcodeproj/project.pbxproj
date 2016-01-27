@@ -11,13 +11,14 @@
 		530FDA851C48A0D5004011B2 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 530FDA841C48A0D5004011B2 /* Assets.xcassets */; };
 		530FDA881C48A0D5004011B2 /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 530FDA861C48A0D5004011B2 /* LaunchScreen.storyboard */; };
 		530FDAF01C48C80C004011B2 /* STService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 530FDAEF1C48C80C004011B2 /* STService.swift */; };
+		53132E851C58691F0068E2AF /* STCurrentUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53132E841C58691F0068E2AF /* STCurrentUser.swift */; };
+		53132E871C58904D0068E2AF /* STTableFooterView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 53132E861C58904D0068E2AF /* STTableFooterView.swift */; };
 		5339055A1C50B8FA0071E97D /* STUserDefaults.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905591C50B8FA0071E97D /* STUserDefaults.swift */; };
 		5339055C1C50BC070071E97D /* STNotification.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5339055B1C50BC070071E97D /* STNotification.swift */; };
 		533905631C5201130071E97D /* STNetWorkRequestData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905621C5201130071E97D /* STNetWorkRequestData.swift */; };
 		533905691C5205410071E97D /* STUserViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905671C5205410071E97D /* STUserViewController.swift */; };
 		5339056A1C5205410071E97D /* STUserViewController.xib in Resources */ = {isa = PBXBuildFile; fileRef = 533905681C5205410071E97D /* STUserViewController.xib */; };
 		5339056C1C5222400071E97D /* STColor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5339056B1C5222400071E97D /* STColor.swift */; };
-		5339056E1C5237170071E97D /* STUser.swift in Sources */ = {isa = PBXBuildFile; fileRef = 5339056D1C5237170071E97D /* STUser.swift */; };
 		533905711C5270B80071E97D /* STExtensions.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905701C5270B80071E97D /* STExtensions.swift */; };
 		533905771C5275850071E97D /* STImageLoader.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905761C5275850071E97D /* STImageLoader.swift */; };
 		533905791C5275930071E97D /* STFileManager.swift in Sources */ = {isa = PBXBuildFile; fileRef = 533905781C5275930071E97D /* STFileManager.swift */; };
@@ -40,13 +41,14 @@
 		530FDA871C48A0D5004011B2 /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		530FDA891C48A0D5004011B2 /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
 		530FDAEF1C48C80C004011B2 /* STService.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STService.swift; sourceTree = "<group>"; };
+		53132E841C58691F0068E2AF /* STCurrentUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STCurrentUser.swift; sourceTree = "<group>"; };
+		53132E861C58904D0068E2AF /* STTableFooterView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STTableFooterView.swift; sourceTree = "<group>"; };
 		533905591C50B8FA0071E97D /* STUserDefaults.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUserDefaults.swift; sourceTree = "<group>"; };
 		5339055B1C50BC070071E97D /* STNotification.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STNotification.swift; sourceTree = "<group>"; };
 		533905621C5201130071E97D /* STNetWorkRequestData.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STNetWorkRequestData.swift; sourceTree = "<group>"; };
 		533905671C5205410071E97D /* STUserViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUserViewController.swift; sourceTree = "<group>"; };
 		533905681C5205410071E97D /* STUserViewController.xib */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = file.xib; path = STUserViewController.xib; sourceTree = "<group>"; };
 		5339056B1C5222400071E97D /* STColor.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STColor.swift; sourceTree = "<group>"; };
-		5339056D1C5237170071E97D /* STUser.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STUser.swift; sourceTree = "<group>"; };
 		533905701C5270B80071E97D /* STExtensions.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STExtensions.swift; sourceTree = "<group>"; };
 		533905761C5275850071E97D /* STImageLoader.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STImageLoader.swift; sourceTree = "<group>"; };
 		533905781C5275930071E97D /* STFileManager.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = STFileManager.swift; sourceTree = "<group>"; };
@@ -148,7 +150,7 @@
 		5339056F1C5237290071E97D /* Model */ = {
 			isa = PBXGroup;
 			children = (
-				5339056D1C5237170071E97D /* STUser.swift */,
+				53132E841C58691F0068E2AF /* STCurrentUser.swift */,
 			);
 			name = Model;
 			sourceTree = "<group>";
@@ -158,6 +160,7 @@
 			children = (
 				5339057F1C570ADE0071E97D /* STEventsCell.swift */,
 				533905801C570ADE0071E97D /* STEventsCell.xib */,
+				53132E861C58904D0068E2AF /* STTableFooterView.swift */,
 			);
 			name = views;
 			sourceTree = "<group>";
@@ -346,11 +349,13 @@
 			buildActionMask = 2147483647;
 			files = (
 				533905691C5205410071E97D /* STUserViewController.swift in Sources */,
+				53132E871C58904D0068E2AF /* STTableFooterView.swift in Sources */,
 				53B7FE791C4F506C00DFEE14 /* STMainViewController.swift in Sources */,
 				533905791C5275930071E97D /* STFileManager.swift in Sources */,
 				533905771C5275850071E97D /* STImageLoader.swift in Sources */,
 				533905631C5201130071E97D /* STNetWorkRequestData.swift in Sources */,
 				5339057B1C56338D0071E97D /* STHud.swift in Sources */,
+				53132E851C58691F0068E2AF /* STCurrentUser.swift in Sources */,
 				530FDA7E1C48A0D5004011B2 /* AppDelegate.swift in Sources */,
 				533905711C5270B80071E97D /* STExtensions.swift in Sources */,
 				5339056C1C5222400071E97D /* STColor.swift in Sources */,
@@ -360,7 +365,6 @@
 				5339055A1C50B8FA0071E97D /* STUserDefaults.swift in Sources */,
 				53B7FE741C4F453200DFEE14 /* STBasicViewController.swift in Sources */,
 				530FDAF01C48C80C004011B2 /* STService.swift in Sources */,
-				5339056E1C5237170071E97D /* STUser.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};

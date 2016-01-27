@@ -9,10 +9,10 @@
 import UIKit
 
 class STNotification: NSObject {
-  let NOTIFICATION_LOGIN = "notification_login"
-  let NOTIFICATION_NEED_LOGIN = "notification_need_login"
-  let NOTIFICATION_WAIT = "notification_wait"
-  let NOTIFICATION_USER_REFRESHED = "notification_user_refreshed"
+  let NOTIFICATION_LOGIN = "notification_login" ///post when access token refrehed
+  let NOTIFICATION_NEED_LOGIN = "notification_need_login" ///post when access token no or invalid
+  let NOTIFICATION_WAIT = "notification_wait"  ///post when URL scheme call back
+  let NOTIFICATION_USER_REFRESHED = "notification_user_refreshed" ///post when user have been loaded
   
   class var sharedNotification : STNotification {
     struct Static {
